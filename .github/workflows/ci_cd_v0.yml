@@ -16,3 +16,39 @@ jobs:
       
       - name: Print mensaje
         run: echo "Aplicación compilada correctamente"
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Print mensaje
+        run: echo "Iniciando pruebas unitarias"
+      
+      - name: Obteniendo cobertura de pruebas
+        run: echo "Se obtuvo una cobertura del 85%"
+
+  packaging:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Generando imagen de la aplicación Docker
+        run: echo "Imagen Docker generada exitosamente"
+      
+      - name: Push imagen al registro
+        run: echo "Empujando imagen al registro DockerHub"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: packaging
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Desplegando en entorno de desarrollo
+        run: echo "Aplicación desplegada en desarrollo exitosamente"
+    

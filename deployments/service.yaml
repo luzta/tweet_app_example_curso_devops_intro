@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tweet-app
+  labels:
+    app: tweet-app
+spec:
+  type: ClusterIP
+  selector:
+    app: tweet_app
+  ports:
+  - port: 80
+    targetPort: 80

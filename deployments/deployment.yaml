@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tweet_app_deploy
+  labels:
+    app: tweet_app
+    environment: dev
+  annotations:
+    description: Ejemplo de despliegue con gitops
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tweet_app
+  template:
+    metadata:
+      labels:
+        app: tweet_app
+        environment: dev
+      annotations:
+        description: tweet_app deployment pod
+    spec:
+      containers:
+      - name: server
+        image: luzta/linux_tweet_app:2.0
+        ports:
+        - containerPort: 80
